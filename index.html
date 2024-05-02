@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <!-- PRECONNECTS -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <!-- META -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Github Favorites</title>
+   <!-- STYLES -->
+   <link rel="stylesheet" href="style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+   <!-- CONTAINER APP-->
+   <div id="app">
+      <!-- INTRODUCING THE WEBSITE -->
+      <header>
+         <h1>
+            GITHUB FAVORITES
+         </h1>
+   
+         <form>
+            <label class="sr-only" for="search-user">Github User</label>
+            <input id="search-user" type="text" placeholder="Github User">
+            <button>
+               &plus;
+            </button>
+         </form>
+      </header>
+      <!-- USER GITHUB INFOS -->
+      <main id="content-container">
+         <table class="user-info">
+            <thead class="user-sections">
+               <tr>
+                  <th>User</th>
+                  <th>Repositories</th>
+                  <th>Followers</th>
+                  <th></th>
+               </tr>
+            </thead>
+            
+            <tbody class="user-data">
+               <tr>
+                  <td class="user">
+                     <img src="https://github.com/GLtegani.png" alt="Gabriel Image">
+                     <a href="https://github.com/GLtegani" target="_blank">
+                        <p>Gabriel Tegani</p>
+                        <span>GLtegani</span>
+                     </a>
+                  </td>
+                  <td class="repositories">
+                     58
+                  </td>
+                  <td class="followers">
+                     1
+                  </td>
+                  <td>
+                     <button class="remove">
+                        &times;
+                     </button>
+                  </td>
+               </tr>
+
+               <tr>
+                  <td class="user">
+                     <img src="https://github.com/GLtegani.png" alt="Gabriel Image">
+                     <a href="https://github.com/GLtegani" target="_blank">
+                        <p>Gabriel Tegani</p>
+                        <span>GLtegani</span>
+                     </a>
+                  </td>
+                  <td class="repositories">
+                     58
+                  </td>
+                  <td class="followers">
+                     1
+                  </td>
+                  <td>
+                     <button class="remove">
+                        &times;
+                     </button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </main>
+   </div>
+
+   <!-- SCRIPTS -->
+   <script src="./scripts/main.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+/* CONFIG */
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+:root {
+   font-size: 62.5%;
+
+   --ff-primary: "Poppins", sans-serif;
+   
+   --txt-color: #303030;
+   --hue: 194;
+   --primary-color: hsl(var(--hue), 100%, 63%);
+   --bg-body: rgb(227, 241, 243);
+}
+
+body {
+   font-size: 1.6rem;
+   font-family: var(--ff-primary);
+   background-color: var(--bg-body);
+}
+
+body *{
+   color: var(--txt-color);
+}
+
+button {
+   cursor: pointer;
+}
+
+.sr-only {
+   position: absolute;
+   width: 0.1rem;
+   height: 0.1rem;
+   padding: 0;
+   margin: -1rem;
+   border-width: 0;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   white-space: nowrap;
+}
+
+img {
+   width: 5rem;
+   height: 5rem;
+   object-fit: cover;
+   border-radius: 50%;
+}
+
+/* CONTAINER APP */
+#app {
+   padding: 2rem;
+   width: 50rem;
+   margin: 0 auto;
+}
+
+header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 2.5rem 0;
+}
+
+header h1 {
+   font-size: 2rem;
+}
+
+header form {
+   display: flex;
+   align-items: center;
+}
+
+header input {
+   height: 3.2rem;
+   border: 0.1rem solid #ccc;
+   border-radius: 0.4rem 0 0 0.4rem;
+   padding: 0 0.8rem;
+}
+
+header form button {
+   border-radius: 0 0.4rem 0.4rem 0;
+   height: 3.2rem;
+   border: none;
+   background-color: var(--primary-color);
+   padding: 0 1rem;
+}
+
+header form button:hover {
+   filter: brightness(1.1);
+}
+
+/* USER GITHUB INFOS */
+table {
+   width: 100%;
+   font-size: 1.4rem;
+   color: var(--txt-color);
+   border-collapse: collapse;
+   box-shadow: 0 1rem 2rem -1rem rgba(0, 0, 0, 0.3);
+}
+
+table th {
+   background: var(--primary-color);
+   text-align: left;
+   font-weight: normal;
+   padding: 1.5rem;
+}
+
+table th:first-child {
+   border-top-left-radius: 0.4rem;
+}
+
+table th:last-child {
+   border-top-right-radius: 0.4rem;
+}
+
+table tr {
+   background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+   background-color: #ddd;
+}
+
+table td {
+   padding: 1.5rem;
+   text-align: left;
+}
+
+table td.user {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+}
+
+table td.user a {
+   text-decoration: none;
+}
+
+table td.user a p {
+   font-weight: bold;
+}
+
+table td .remove {
+   background: none;
+   color: red;
+   border: none;
+}
+
+
+
+
+
