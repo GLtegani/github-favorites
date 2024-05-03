@@ -14,10 +14,9 @@ class Favorites {
 
    async add(username) {
       try {
-         const userExists = this.entries.find(entry => entry.login === username);
-         
+         const userExists = this.entries.find(entry => String(entry.login).toLowerCase() === username.toLowerCase());
          if(userExists) {
-            throw new Error('Already registered user');
+            throw new Error('User already registered');
          };
 
          const user = await GithubUser.search(username);
@@ -59,6 +58,7 @@ class FavoritesView extends Favorites {
 
    onadd() {
       const addBtn = this.root.querySelector('.search button');
+      
       addBtn.onclick = (event) => {
          event.preventDefault();
          const {value} = this.root.querySelector('.search input');
