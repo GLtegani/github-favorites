@@ -1,3 +1,7 @@
+// IMPORTS
+import { GithubUser } from "./GithubUser.js";
+
+// Classe que vai conter a lógica dos dados e como serão estruturados
 class Favorites {
    constructor(root) {
       this.root = document.querySelector(root);
@@ -5,36 +9,85 @@ class Favorites {
    };
 
    load() {
-      this.entries = [
-         {
-            login: 'GLtegani',
-            name: 'GLtegani',
-            public_repos: '57',
-            followers: '1',
-         },
+      this.entries = JSON.parse(localStorage.getItem('@github-favorites:')) || [];
+   };
 
-         {
-            login: 'GLtegani',
-            name: 'GLtegani',
-            public_repos: '57',
-            followers: '1',
-         },
-      ];
+   async add(username) {
+      try {
+         const userExists = this.entries.find(entry => entry.login === username);
+         
+         if(userExists) {
+            throw new Error('Already registered user');
+         };
+
+         const user = await GithubUser.search(username);
+
+         if(user.login === undefined) {
+            throw new Error('User not found');
+         };
+
+         this.entries = [user, ...this.entries];
+         this.update();
+         this.save();
+      } catch (error) {
+         alert(error.message);
+      };
+   };
+
+   save() {
+      localStorage.setItem('@github-favorites:', JSON.stringify(this.entries));
+   };
+
+   delete(user) {
+      const filteredEntries = this.entries.filter(entry => entry.login !== user.login);
+      this.entries = filteredEntries;
+      this.update();
+      this.save();
    };
 };
 
+// Classe que vai criar a visualização e eventos do HTML
 class FavoritesView extends Favorites {
    constructor(root) {
       super(root);
+      
+      this.tbody = this.root.querySelector('table tbody');
 
       this.update();
+      this.onadd();
+   };
+
+   onadd() {
+      const addBtn = this.root.querySelector('.search button');
+      addBtn.onclick = (event) => {
+         event.preventDefault();
+         const {value} = this.root.querySelector('.search input');
+
+         this.add(value);
+      };
    };
 
    update() {
       this.removeAllTr();
 
-      entries.forEach(user => {
-         console.log(user);
+      this.entries.forEach(user => {
+         const row = this.createRow();
+         row.querySelector('.user img').src = `https://github.com/${user.login}.png`;
+         row.querySelector('.user a').href = `https://github.com/${user.login}`;
+         row.querySelector('.user img').alt = `${user.name} image`;
+         row.querySelector('.user p').textContent = user.name;
+         row.querySelector('.user span').textContent = user.login;
+         row.querySelector('.repositories').textContent = user.public_repos;
+         row.querySelector('.followers').textContent = user.followers;
+         row.querySelector('.remove').onclick = () => {
+            const isOk = confirm('Tem certeza que deseja remover o usuário?');
+
+            if(isOk) {
+               this.delete(user);
+            }
+         };
+
+         this.tbody.append(row);
       });
    };
 
@@ -43,17 +96,17 @@ class FavoritesView extends Favorites {
       const trGithub = document.createElement('tr');
       trGithub.innerHTML = `
          <td class="user">
-            <img src="https://github.com/GLtegani.png" alt="Gabriel Image">
-            <a href="https://github.com/GLtegani" target="_blank">
-               <p>Gabriel Tegani</p>
-               <span>GLtegani</span>
+            <img src="" alt="">
+            <a href="" target="_blank">
+               <p></p>
+               <span></span>
             </a>
          </td>
          <td class="repositories">
-            58
+            
          </td>
          <td class="followers">
-            1
+            
          </td>
          <td>
             <button class="remove">
@@ -66,14 +119,9 @@ class FavoritesView extends Favorites {
    };
 
    removeAllTr() {
-      const tbody = this.root.querySelector('table tbody');
-
-      tbody.querySelectorAll('tr').forEach((tr) => {tr.remove()});
+      this.tbody.querySelectorAll('tr').forEach((tr) => {tr.remove()});
    };
 };
-
-
-
 
 // EXPORTS
 export { FavoritesView };
